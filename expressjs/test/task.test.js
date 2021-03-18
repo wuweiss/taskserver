@@ -48,4 +48,14 @@ test("this test should return an empty list of tasks", () => {
     };
     expect(T.getAllTasks()).toEqual(expectedResult);
 });
+
+test("this test should add two tasks to the list", () => {
+    const expectedResults = [0, 1];
+
+    expect(T.addTask(inputData[0])).toBe(expectedResults[0]);
+    expect(T.addTask(inputData[1])).toBe(expectedResults[1]);
+});
+
+test("this test should return two tasks as a list", () => {
+    expect(T.getAllTasks()).toEqual(outputData);
 });
