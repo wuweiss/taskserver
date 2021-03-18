@@ -12,6 +12,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "quotes": [2, "double"],
         "indent": ["error", 4],
         "import/prefer-default-export": "off",
         "strict": 1
