@@ -29,7 +29,7 @@ async def create_task(task: Task):
 
 @app.get("/task")
 async def get_tasks():
-    return {"task": taskStore}
+    return {"tasks": taskStore}
 
 
 @app.get("/task/{taskid}")
@@ -39,3 +39,13 @@ async def get_task(taskid: int):
         return {}
     else:
         return task
+
+
+@app.get("/tag/{tag}")
+async def get_tag_task(tag:str):
+    return {"tasks": filter_by((lambda key, val, t: (val in t.tag)), "tag", tag)}
+
+
+def filter_by(f, key, val):
+    """This function filters """
+    return [(taskStore[t] for t in taskStore if f(key, val, taskStore[t]))]
