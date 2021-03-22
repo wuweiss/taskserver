@@ -52,6 +52,11 @@ app.get("/task/:id", (req, res) => {
     res.json(task);
 });
 
+app.delete("/task/", (req, res) => {
+    const result = T.deleteAllTask();
+    return (result ? res.sendStatus(200) : res.sendStatus(500));
+});
+
 app.delete("/task/:id", (req, res) => {
     const result = T.deleteTask(`${req.params.id}`);
     res.json(result);

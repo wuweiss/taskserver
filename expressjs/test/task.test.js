@@ -97,3 +97,8 @@ test("should delete a task by id", () => {
     const expectedResult = [outputData[0], outputData[2]];
     expect(T.deleteTask(id)).toEqual(expectedResult);
 });
+
+test("should delete all tasks in store", () => {
+    const expectedResult = true;
+    expect(T.deleteAllTask()).toBe(expectedResult);
+});

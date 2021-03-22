@@ -28,6 +28,12 @@ const getTaskById = (id) => R.compose(
     R.prop("tasks"),
 )(taskStore);
 
+function deleteAllTask() {
+    taskStore.tasks = {};
+    taskStore.size = 0;
+    return true;
+}
+
 function deleteTask(id) {
     const filterId = (taskId, task) => taskId !== `${task.id}`;
 
@@ -59,4 +65,5 @@ exports.getAllTasks = getAllTasks;
 exports.addTask = addTask;
 exports.getTaskById = getTaskById;
 exports.deleteTask = deleteTask;
+exports.deleteAllTask = deleteAllTask;
 exports.getTasksByTag = getTasksByTag;
