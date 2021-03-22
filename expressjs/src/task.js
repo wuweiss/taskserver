@@ -7,16 +7,10 @@ const taskStore = {
     size: 0,
 };
 
-function getAllTasks() {
-    return R.compose(
-        R.values,
-        R.prop("tasks"),
-    )(taskStore);
-}
-
-function deleteAllTasks() {
-    return {};
-}
+const getAllTasks = () => R.compose(
+    R.values,
+    R.prop("tasks"),
+)(taskStore);
 
 function addTask({ name, tags, text }) {
     const id = taskStore.size;
@@ -28,46 +22,40 @@ function addTask({ name, tags, text }) {
     return id;
 }
 
-function getTaskById(id) {
-    return R.compose(
-        R.prop(id),
-        R.pick(id),
-        R.prop("tasks"),
-    )(taskStore);
-}
+const getTaskById = (id) => R.compose(
+    R.prop(id),
+    R.pick(id),
+    R.prop("tasks"),
+)(taskStore);
 
 function deleteTask(id) {
+    const filterId = (taskId, task) => taskId !== `${task.id}`;
+
     taskStore.tasks = R.compose(
         R.values,
-        R.dissoc(id),
+        R.filter(R.partial(filterId, id)),
         R.prop("tasks"),
     )(taskStore);
     return taskStore.tasks;
 }
 
+const filterTasks = (f) => R.compose(
+    R.values,
+    R.filter(f),
+    R.prop("tasks"),
+)(taskStore);
 
-function filterTasks(f) {
-    return R.compose(
-        R.values,
-        R.filter(f),
-        R.prop("tasks"),
-    )(taskStore);
-}
+const findTag = (tag, task) => R.compose(
+    R.includes(tag),
+    R.prop("tags"),
+)(task);
 
-function findTag(tag, task) {
-    return R.compose(
-        R.includes(tag),
-        R.prop("tags"),
-    )(task);
-}
-
-function getTasksByTag(tag) {
+const getTasksByTag = (tag) => {
     const res = filterTasks(findTag.bind(null, tag));
     return res;
-}
+};
 
 exports.getAllTasks = getAllTasks;
-exports.deleteAllTasks = deleteAllTasks;
 exports.addTask = addTask;
 exports.getTaskById = getTaskById;
 exports.deleteTask = deleteTask;

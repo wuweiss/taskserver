@@ -8,7 +8,8 @@
         "lint": "eslint \"src/**/*\" && eslint \"test/**/*\"",
         "lint:// FIXME: x": "npm run lint -- --fix",
         "test": "npm run lint && npm run test:run",
-        "test:run": "node_modules/.bin/jest test --coverage --coverageDirectory=\"coverage\""
+        "test:run": "node_modules/.bin/jest test",
+        "test:cov": "node_modules/.bin/jest test --coverage --coverageDirectory=\"coverage\""
     },
     "repository": {
         "type": "git",

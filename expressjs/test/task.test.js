@@ -18,7 +18,16 @@ const inputData = [
             "tag2.2",
         ],
         text: "my super text 2",
-    }];
+    },
+    {
+        name: "myTask 3",
+        tags: [
+            "tag1.3",
+            "tag2.3",
+        ],
+        text: "my super text 3",
+    },
+];
 
 const outputData = [
     {
@@ -37,41 +46,54 @@ const outputData = [
             "tag2.2",
         ],
         text: "my super text 2",
+    }, {
+        id: 2,
+        name: "myTask 3",
+        tags: [
+            "tag1.3",
+            "tag2.3",
+        ],
+        text: "my super text 3",
     },
 ];
 
-test("this test should return an empty list of tasks", () => {
+test("should return an empty list of tasks", () => {
     const expectedResult = [];
     expect(T.getAllTasks()).toEqual(expectedResult);
 });
 
-test("this test should add two tasks to the list", () => {
-    const expectedResults = [0, 1];
+test("should add three tasks to the list", () => {
+    const expectedResults = [0, 1, 2];
 
     expect(T.addTask(inputData[0])).toBe(expectedResults[0]);
     expect(T.addTask(inputData[1])).toBe(expectedResults[1]);
+    expect(T.addTask(inputData[2])).toEqual(expectedResults[2]);
 });
 
-test("this test should return two tasks as a list", () => {
+test("should return two tasks as a list", () => {
     expect(T.getAllTasks()).toEqual(outputData);
 });
 
-test("this test gets tasks by a tag", () => {
-    const inputData = "tag1.1";
+test("should get tasks by a tag", () => {
+    const tag = "tag1.1";
     const expectedResult = [outputData[0]];
-    expect(T.getTasksByTag(inputData)).toEqual(expectedResult);
+    expect(T.getTasksByTag(tag)).toEqual(expectedResult);
 });
 
-
-test("this test gets an empty result for unknown tag", () => {
-    const inputData = "unknown tag";
+test("should get an empty result for unknown tag", () => {
+    const tag = "unknown tag";
     const expectedResult = [];
-    expect(T.getTasksByTag(inputData)).toEqual(expectedResult);
+    expect(T.getTasksByTag(tag)).toEqual(expectedResult);
 });
 
+test("should return a task by id", () => {
+    const id = "1";
+    const result = T.getTaskById(id);
+    expect(result).toEqual(outputData[1]);
+});
 
-test("this test deleltes a tasks by id", () => {
-    const inputData = "1";
-    const expectedResult = [outputData[0]];
-    expect(T.deleteTask(inputData)).toEqual(expectedResult);
+test("should delete a task by id", () => {
+    const id = "1";
+    const expectedResult = [outputData[0], outputData[2]];
+    expect(T.deleteTask(id)).toEqual(expectedResult);
 });

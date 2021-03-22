@@ -48,12 +48,12 @@ app.post("/task/", (req, res) => {
 });
 
 app.get("/task/:id", (req, res) => {
-    const task = T.getTaskById(req.params.id);
+    const task = T.getTaskById(`${req.params.id}`);
     res.json(task);
 });
 
 app.delete("/task/:id", (req, res) => {
-    const result = T.deleteTask(req.params.id);
+    const result = T.deleteTask(`${req.params.id}`);
     res.json(result);
 });
 
