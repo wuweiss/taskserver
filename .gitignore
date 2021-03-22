@@ -1,6 +1,9 @@
 # Custom Files
 scratchBuffer.org
 
+# Jest
+coverage/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

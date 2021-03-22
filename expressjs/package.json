@@ -8,7 +8,7 @@
         "lint": "eslint \"src/**/*\" && eslint \"test/**/*\"",
         "lint:// FIXME: x": "npm run lint -- --fix",
         "test": "npm run lint && npm run test:run",
-        "test:run": "node_modules/.bin/jest test"
+        "test:run": "node_modules/.bin/jest test --coverage --coverageDirectory=\"coverage\""
     },
     "repository": {
         "type": "git",
@@ -25,7 +25,8 @@
     "homepage": "https://github.com/wuweiss/taskserver#readme",
     "dependencies": {
         "ajv": "^7.2.1",
-        "express": "^4.17.1"
+        "express": "^4.17.1",
+        "ramda": "^0.27.1"
     },
     "devDependencies": {
         "eslint": "^7.22.0",
