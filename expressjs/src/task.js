@@ -4,7 +4,7 @@ const R = require("ramda");
 
 const taskStore = {
     tasks: {},
-    size: 0,
+    counter: 0,
 };
 
 const getAllTasks = () => R.compose(
@@ -13,8 +13,8 @@ const getAllTasks = () => R.compose(
 )(taskStore);
 
 function addTask({ name, tags, text }) {
-    const id = taskStore.size;
-    taskStore.size += 1;
+    const id = taskStore.counter;
+    taskStore.counter += 1;
     taskStore.tasks[id] = {
         id, name, tags, text,
     };
@@ -30,7 +30,7 @@ const getTaskById = (id) => R.compose(
 
 function deleteAllTask() {
     taskStore.tasks = {};
-    taskStore.size = 0;
+    taskStore.counter = 0;
     return true;
 }
 
