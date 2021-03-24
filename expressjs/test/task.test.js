@@ -10,6 +10,11 @@ const inputData = [
             "tag2.1",
         ],
         text: "my super text 1",
+        due: {
+            year: 2021,
+            month: 4,
+            day: 3,
+        },
     },
     {
         name: "myTask 2",
@@ -18,6 +23,11 @@ const inputData = [
             "tag2.2",
         ],
         text: "my super text 2",
+        due: {
+            year: 2021,
+            month: 4,
+            day: 4,
+        },
     },
     {
         name: "myTask 3",
@@ -26,7 +36,19 @@ const inputData = [
             "tag2.3",
         ],
         text: "my super text 3",
+        due: {
+            year: 2021,
+            month: 4,
+            day: 5,
+        },
     },
+];
+
+// month range is 0-11 ¯\_(ツ)_/¯...JS...
+const due = [
+    new Date(Date.UTC(2021, 3, 3)),
+    new Date(Date.UTC(2021, 3, 4)),
+    new Date(Date.UTC(2021, 3, 5)),
 ];
 
 const outputData = [
@@ -38,6 +60,7 @@ const outputData = [
             "tag2.1",
         ],
         text: "my super text 1",
+        due: due[0],
     }, {
         id: 1,
         name: "myTask 2",
@@ -46,6 +69,7 @@ const outputData = [
             "tag2.2",
         ],
         text: "my super text 2",
+        due: due[1],
     }, {
         id: 2,
         name: "myTask 3",
@@ -54,6 +78,7 @@ const outputData = [
             "tag2.3",
         ],
         text: "my super text 3",
+        due: due[2],
     },
 ];
 
@@ -70,7 +95,7 @@ test("should add three tasks to the list", () => {
     expect(T.addTask(inputData[2])).toEqual(expectedResults[2]);
 });
 
-test("should return two tasks as a list", () => {
+test("should return all tasks as a list", () => {
     expect(T.getAllTasks()).toEqual(outputData);
 });
 
@@ -88,8 +113,17 @@ test("should get an empty result for unknown tag", () => {
 
 test("should return a task by id", () => {
     const id = "1";
-    const result = T.getTaskById(id);
-    expect(result).toEqual(outputData[1]);
+    expect(T.getTaskById(id)).toEqual(outputData[1]);
+});
+
+test("should return tasks due a date", () => {
+    const myDate = {
+        year: 2021,
+        month: 4,
+        day: 4,
+    };
+    const expectedResult = [outputData[0], outputData[1]];
+    expect(T.getTasksDue(myDate)).toEqual(expectedResult);
 });
 
 test("should delete a task by id", () => {

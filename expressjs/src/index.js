@@ -23,8 +23,28 @@ const taskSchema = {
         text: {
             type: "string",
         },
+        due: {
+            type: "object",
+            required: ["year", "month", "day"],
+            properties: {
+                year: {
+                    type: "integer",
+                    minimum: 0,
+                },
+                month: {
+                    type: "integer",
+                    minimum: 1,
+                    maximum: 12,
+                },
+                day: {
+                    type: "integer",
+                    minimum: 1,
+                    maximum: 31,
+                },
+            },
+        },
     },
-    required: ["name", "tags", "text"],
+    required: ["name", "tags", "text", "due"],
     additionalProperties: false,
 };
 const validate = ajv.compile(taskSchema);
@@ -65,4 +85,14 @@ app.delete("/task/:id", (req, res) => {
 app.get("/tag/:tag", (req, res) => {
     const tasks = T.getTasksByTag(req.params.tag);
     res.json({ tasks });
+});
+
+app.get("/due/:year/:month/:day", (req, res) => {
+    const due = {
+        year: req.params.year,
+        month: req.params.month,
+        day: req.params.day,
+    };
+    const tasks = T.getTasksDue(due);
+    res.json(tasks);
 });
