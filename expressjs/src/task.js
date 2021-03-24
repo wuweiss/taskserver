@@ -29,7 +29,7 @@ const addTask = (task) => {
     };
 
     return id;
-}
+};
 
 const getTaskById = (id) => R.compose(
     R.prop(id),
