@@ -26,7 +26,7 @@
     "homepage": "https://github.com/wuweiss/taskserver#readme",
     "dependencies": {
         "ajv": "^7.2.1",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "ramda": "^0.27.1"
     },
     "devDependencies": {
